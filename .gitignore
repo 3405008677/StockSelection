@@ -2,6 +2,8 @@
 node_modules/
 frontend/node_modules/
 .openCode/node_modules/
+package-lock.json
+**/package-lock.json
 
 # Python
 __pycache__/
