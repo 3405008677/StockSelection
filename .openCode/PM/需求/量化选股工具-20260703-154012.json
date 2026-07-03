@@ -1,0 +1,210 @@
+{
+  "project": "StockSelection",
+  "branchName": "quant-stock-selection-mvp",
+  "description": "量化选股工具 MVP - FastAPI 后端 + Vue3/Vite 前端 + 文件存储，支持技术指标筛选、自选股和模板管理",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "创建项目基础骨架",
+      "description": "作为开发者，我需要创建后端、前端、数据目录和基础命令，使项目可以被安装、启动和验证。",
+      "acceptanceCriteria": [
+        "项目包含 backend、frontend、data、tests 或等价测试目录",
+        "后端使用 FastAPI，并提供基础健康检查接口",
+        "前端使用 Vue3 + Vite，并能展示基础页面",
+        "文件存储目录包含 data/universe、data/cache、data/user、data/logs",
+        "提供项目 README，说明启动和验证命令",
+        "typecheck 通过",
+        "测试通过",
+        "build 通过"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "实现文件存储和基础数据模型",
+      "description": "作为开发者，我需要统一读写 JSON/CSV 文件，以便后续股票池、自选股、模板和行情缓存可以稳定持久化。",
+      "acceptanceCriteria": [
+        "实现股票、行情 K 线、自选股、筛选模板、筛选条件、筛选结果的数据模型",
+        "实现 JSON 文件读写，文件不存在时能返回默认结构",
+        "实现 CSV 行情缓存读写",
+        "文件读写失败时能返回明确错误",
+        "typecheck 通过",
+        "测试通过"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-003",
+      "title": "实现股票池与样例行情数据能力",
+      "description": "作为个人研究用户，我希望工具能加载 A 股和美股股票池，并在无外部数据源时用样例行情完成筛选闭环。",
+      "acceptanceCriteria": [
+        "提供 cn_stocks.json 和 us_popular_stocks.json 的样例股票池",
+        "后端提供市场列表和股票池查询接口",
+        "后端能为样例股票提供日线行情缓存",
+        "后端能为单只股票提供少量分钟行情样例或缓存数据",
+        "typecheck 通过",
+        "测试通过"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-004",
+      "title": "实现技术指标计算",
+      "description": "作为个人研究用户，我希望系统能计算常用技术指标，以便根据技术形态筛选股票。",
+      "acceptanceCriteria": [
+        "支持简单移动均线 MA",
+        "支持 MACD 指标计算",
+        "支持 RSI 指标计算",
+        "指标计算对数据不足的股票有明确处理方式",
+        "typecheck 通过",
+        "测试通过"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-005",
+      "title": "实现日线筛选服务和筛选 API",
+      "description": "作为个人研究用户，我希望提交结构化技术指标条件后得到筛选结果表格数据。",
+      "acceptanceCriteria": [
+        "POST /api/screen/run 接收市场、股票池范围和结构化指标条件",
+        "筛选主流程只使用日线数据",
+        "筛选结果包含代码、名称、市场、最新价、涨跌幅、成交量、命中原因、自选状态",
+        "单只股票指标计算失败不影响整体筛选，并能汇总失败数量",
+        "typecheck 通过",
+        "测试通过"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-006",
+      "title": "实现自选股管理 API",
+      "description": "作为个人研究用户，我希望保存和管理自选股分组，以便持续跟踪关注标的。",
+      "acceptanceCriteria": [
+        "支持读取自选股分组",
+        "支持添加自选股到指定��组",
+        "支持删除自选股",
+        "自选股数据保存到本地 JSON 文件",
+        "筛选结果和个股详情能返回自选状态",
+        "typecheck 通过",
+        "测试通过"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-007",
+      "title": "实现筛选模板管理 API",
+      "description": "作为个人研究用户，我希望保存、读取、更新和删除常用筛选条件模板，以便下次快速复用。",
+      "acceptanceCriteria": [
+        "支持读取筛选模板列表",
+        "支持保存筛选模板",
+        "支持更新筛选模板",
+        "支持删除筛选模板",
+        "模板数据保存到本地 JSON 文件",
+        "typecheck 通过",
+        "测试通过"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-008",
+      "title": "实现个股详情 API",
+      "description": "作为个人研究用户，我希望打开股票详情，查看基础信息、日线指标和少量分钟走势。",
+      "acceptanceCriteria": [
+        "GET /api/stocks/{market}/{symbol} 返回股票基础信息、日线行情摘要、技术指标、自选状态",
+        "GET /api/stocks/{market}/{symbol}/intraday 返回少量分钟走势数据",
+        "分钟数据失败不影响日线详情接口",
+        "typecheck 通过",
+        "测试通过"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-009",
+      "title": "实现 Vue 筛选页和结果表格",
+      "description": "作为个人研究用户，我希望在浏览器中配置技术指标条件并查看筛选结果。",
+      "acceptanceCriteria": [
+        "页面可以选择市场和股票池",
+        "页面可以配置至少 MA、MACD、RSI 三类指标条件",
+        "页面可以执行筛选并展示结果表格",
+        "结果表格支持搜索、排序、查看详情入口和加入自选入口",
+        "筛选中、无结果、接口失败都有明确状态提示",
+        "typecheck 通过",
+        "build 通过",
+        "浏览器验证通过"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-010",
+      "title": "实现自选股和模板前端交互",
+      "description": "作为个人研究用户，我希望在页面中管理自选股和筛选模板，以便稳定维护个人股票池。",
+      "acceptanceCriteria": [
+        "自选股页面展示分组和股票列表",
+        "支持从筛选结果加入自选股",
+        "支持从自选股页面删除股票",
+        "支持保存当前筛选条件为模板",
+        "支持加载、更新、删除筛选模板",
+        "typecheck 通过",
+        "build 通过",
+        "浏览器验证通过"
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-011",
+      "title": "实现个股详情前端页面",
+      "description": "作为个人研究用户，我希望查看个股详情，以便理解股票被筛选出来的原因和近期走势。",
+      "acceptanceCriteria": [
+        "个股详情页展示基础信息和自选状态",
+        "个股详情页展示日线行情摘要和技术指标",
+        "个股详情页展示少量分钟走势数据",
+        "分钟数据失败时页面仍保留日线详情",
+        "typecheck 通过",
+        "build 通过",
+        "浏览器验证通过"
+      ],
+      "priority": 11,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-012",
+      "title": "完成端到端验收与记录",
+      "description": "作为项目维护者，我需要完成自动化验证和验收记录，确保第一版 MVP 可以交付。",
+      "acceptanceCriteria": [
+        "完成一次完整流程：加载股票池 -> 执行技术筛选 -> 查看结果 -> 加入自选 -> 保存模板 -> 复用模板 -> 打开详情",
+        "后端测试通过",
+        "前端 typecheck 通过",
+        "前端 build 通过",
+        "浏览器验证通过",
+        "测试过程写入 .openCode/PM/测试/",
+        "验收结论写入 .openCode/PM/验收/",
+        "typecheck 通过",
+        "测试通过"
+      ],
+      "priority": 12,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+[project]
+name = "stockselection-backend"
+version = "0.1.0"
+description = "FastAPI backend for local quantitative stock screening."
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.128.0",
+  "uvicorn[standard]>=0.38.0",
+  "pydantic>=2.12.0",
+  "pandas>=2.3.0",
+  "yfinance>=0.2.60",
+  "pytest>=9.0.0",
+  "httpx>=0.28.0"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

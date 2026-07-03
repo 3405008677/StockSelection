@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+.openCode/node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+backend/.venv/
+
+# Frontend build output
+frontend/dist/
+dist/
+
+# Local runtime data and caches
+data/cache/
+data/logs/
+data/user/
+*.log
+
+# Browser/test artifacts
+.playwright-mcp/
+playwright-report/
+test-results/
+
+# IDE and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Microsoft/
+
+# Keep project records, ignore OpenCode local dependencies only
+.openCode/temp/
+.openCode/cache/
